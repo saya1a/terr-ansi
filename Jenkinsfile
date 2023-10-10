@@ -6,7 +6,17 @@ pipeline {
         git branch: 'main', url: 'https://github.com/saya1a/terr-ansi.git'
       }
     }
-      stage('Terraform plan') {
+      stage('Terraform init') {
+        steps {
+          sh 'terraform init'
+        }
+      }
+      stage('Validation') {
+        steps {
+          sh 'terraform validate'
+        }
+      }
+       stage('Plan') {
         steps {
           sh 'terraform plan'
         }
