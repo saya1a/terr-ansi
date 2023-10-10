@@ -1,4 +1,5 @@
 provider "aws" {
+    shared_credentials_files = ["/home/sateesh/.aws/credentials"]
     profile = "default"
     region = "us-east-1"
 }
