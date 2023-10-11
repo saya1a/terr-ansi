@@ -11,12 +11,13 @@ resource aws_instance "test-instance" {
     instance_type = "t2.micro"
     vpc_security_group_ids = ["sg-0088786e83e38b36a"]
     key_name      = "ansi-key"
+    
     user_data = <<-EOF
     #!/bin/bash
-    cat /home/jenkins-agent/.ssh/id_rsa.pub >> /home/ubuntu/.ssh/authorized_keys
-    chmod 600 /home/ubuntu/.ssh/authorized_keys
-    chmod 700 /home/ubuntu/.ssh
-    chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+    echo "$(cat /home/jenkins-agent/.ssh/id_rsa.pub)" >> /home/ec2-user/.ssh/authorized_keys
+    chmod 600 /home/ec2-user/.ssh/authorized_keys
+    chmod 700 /home/ec2-user/.ssh
+    chown -R ec2-user:ec2-user /home/ec2-user/.ssh
   EOF
 
     tags = {
