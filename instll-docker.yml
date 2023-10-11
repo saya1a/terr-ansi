@@ -1,6 +1,6 @@
 ---
 - name: Install Docker on Ubuntu
-  hosts: 172.31.44.69
+  hosts: test-server
   become: yes  
 
   tasks:
