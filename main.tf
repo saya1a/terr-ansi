@@ -1,5 +1,5 @@
 provider "aws" {
-    #shared_credentials_files = ["/home/sateesh/.aws/credentials"]
+    shared_credentials_files = ["/home/jenkins-agent/.aws/credentials"]
     profile = "default"
     region = "us-east-1"
 }
