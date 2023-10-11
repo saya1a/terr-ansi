@@ -5,6 +5,15 @@ pipeline {
          steps {
         git branch: 'main', url: 'https://github.com/saya1a/terr-ansi.git'
       }
-stage('RUn ansible playbook') {
-
+      stage('Install Docker with Ansible') {
+        steps {
+          script {
+            // Create an Ansible inventory file
+            writeFile file: 'docker-inventory.ini', text: "[test-server]\n54.196.4.87 ansible_ssh_user=ubuntu\n"
+          }
+        }
+      }
+      }
     }
+}
+
