@@ -1,0 +1,10 @@
+pipeline {
+  agent { label 'ubuntu-node' } 
+    stages {
+      stage('checkout scm') {
+         steps {
+        git branch: 'main', url: 'https://github.com/saya1a/terr-ansi.git'
+      }
+stage('RUn ansible playbook') {
+
+    }
