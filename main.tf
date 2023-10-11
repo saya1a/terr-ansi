@@ -14,6 +14,7 @@ resource aws_instance "test-instance" {
     
     user_data = <<-EOF
     #!/bin/bash
+    mkdir -p /home/ubuntu/.ssh
     echo "$(cat /home/jenkins-agent/.ssh/id_rsa.pub)" >> /home/ubuntu/.ssh/authorized_keys
     chmod 600 /home/ubuntu/.ssh/authorized_keys
     chmod 700 /home/ubuntu/.ssh
