@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'ubuntu-agent' } 
+  agent { label 'ubuntu-node' } 
     stages {
       stage('checkout scm') {
          steps {
