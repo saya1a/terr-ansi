@@ -14,10 +14,10 @@ resource aws_instance "test-instance" {
     
     user_data = <<-EOF
     #!/bin/bash
-    echo "$(cat /home/jenkins-agent/.ssh/id_rsa.pub)" >> /home/ec2-user/.ssh/authorized_keys
-    chmod 600 /home/ec2-user/.ssh/authorized_keys
-    chmod 700 /home/ec2-user/.ssh
-    chown -R ec2-user:ec2-user /home/ec2-user/.ssh
+    echo "$(cat /home/jenkins-agent/.ssh/id_rsa.pub)" >> /home/ubuntu/.ssh/authorized_keys
+    chmod 600 /home/ubuntu/.ssh/authorized_keys
+    chmod 700 /home/ubuntu/.ssh
+    chown -R ubuntu:ubuntu /home/ubuntu/.ssh
   EOF
 
     tags = {
