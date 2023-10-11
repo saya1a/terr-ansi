@@ -11,7 +11,7 @@ pipeline {
         steps {
           script {
             // Create an Ansible inventory file
-            sh 'aws ec2 describe-instances --instance-ids i-00d3dae01ea254fa1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text
+            echo "aws ec2 describe-instances --instance-ids i-00d3dae01ea254fa1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text"
             writeFile file: 'docker-inventory.ini', text: "[test-server]\n54.196.4.87 ansible_ssh_user=ubuntu\n"
             //
             sh 'ansible-playbook -i docker-inventory.ini -u ubuntu -b -e "ansible_python_interpreter=/usr/bin/python3" instll-docker.yml'
