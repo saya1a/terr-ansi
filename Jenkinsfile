@@ -17,20 +17,11 @@ pipeline {
             sh 'terraform plan'
             sh 'terraform apply --auto-approve'
             EC2_PUBLIC_IP = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
+            sh 'echo $EC2_PUBLIC_IP
           }
         }
       }
-      stage('SSH Key Setup') {
-            steps {
-                script {
-                    // Copy your local SSH public key to the EC2 instance using ssh-copy-id
-                    sh "ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@${EC2_PUBLIC_IP}"
-
-                    // Optionally, you can also test the SSH connection
-                    sh "ssh ubuntu@${EC2_PUBLIC_IP} 'echo SSH connection successful'"
-                }
-            }
-        }
+      
     }
 }
 
