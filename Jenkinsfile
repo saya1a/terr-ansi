@@ -28,11 +28,11 @@ pipeline {
       }*/
       stage('get-pub-ip') {
         environment {
-          pub_ip = "${env.EC2_PUBLIC_IP}"
+          pub_ip = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
+        }
         }
          steps {
            echo "$pub_ip"
          }
     }
-}
 }
