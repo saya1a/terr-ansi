@@ -30,9 +30,9 @@ pipeline {
         environment {
           pub_ip = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
         }
-        }
          steps {
            echo "$pub_ip"
          }
     }
+}
 }
