@@ -17,7 +17,7 @@ pipeline {
             sh 'terraform plan'
             sh 'terraform apply --auto-approve'
             EC2_PUBLIC_IP = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
-            sh 'echo $EC2_PUBLIC_IP
+            sh 'echo $EC2_PUBLIC_IP'
           }
         }
       }
