@@ -1,6 +1,6 @@
 ---
 - name: Install Docker on Ubuntu
-  hosts: test-server
+  hosts: ubuntu
   become: yes  
 
   tasks:
