@@ -1,7 +1,7 @@
 pipeline {
   agent { label 'ubuntu-node' }
   environment {
-    EC2_PUBLIC_IP = ''
+    EC2_PUBLIC_IP = '54.234.73.40'
   }
     stages {
       stage('checkout scm') {
@@ -17,34 +17,22 @@ pipeline {
             sh 'terraform plan'
             sh 'terraform apply --auto-approve'
             EC2_PUBLIC_IP = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
-            sh 'echo $EC2_PUBLIC_IP'
           }
         }
       }
+      stage('Install Docker with Ansible') {
+            steps {
+                script {
+                    // Create an Ansible inventory file
+                    writeFile file: 'ansible-inventory.ini', text: "[ubuntu]\n${EC2_PUBLIC_IP} ansible_ssh_user=ubuntu\n"
+
+                    // Run the Ansible playbook to install Docker
+                    sh 'ansible-playbook -i ansible-inventory.ini -u ubuntu -b -e "ansible_python_interpreter=/usr/bin/python3" instll-docker.yml'
+                }
+            }
+        }
       
     }
 }
 
-     /* stage('Validation') {
-        steps {
-          sh 'terraform validate'
-        }
-      }
-       stage('Plan') {
-        steps {
-          sh 'terraform plan'
-        }
-      }
-      stage('Apply') {
-        steps {
-          sh 'terraform apply --auto-approve'
-        }
-      }
-      stage('get-pub-ip') {
-        environment {
-          pub_ip = 
-        }
-         steps {
-           sh 'echo $pub_ip'
-         }
-    } */
+  
