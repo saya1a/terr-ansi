@@ -26,6 +26,9 @@ pipeline {
           sh 'terraform destroy --auto-approve'
         }
       }*/
-      
+      stage('get-pub-ip') {
+        environment {
+                pub-ip = "${env.EC2_PUBLIC_IP}"
+                echo "$pub-ip"
     }
 }
