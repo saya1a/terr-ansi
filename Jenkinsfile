@@ -28,7 +28,7 @@ pipeline {
       }*/
       stage('get-pub-ip') {
         environment {
-          pub_ip = "Hello"
+          pub_ip = "${env.EC2_PUBLIC_IP}"
         }
          steps {
            echo "$pub_ip"
