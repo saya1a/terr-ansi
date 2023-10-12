@@ -21,11 +21,11 @@ pipeline {
           sh 'terraform plan'
         }
       }
-     /* stage('Apply') {
+      stage('Apply') {
         steps {
           sh 'terraform destroy --auto-approve'
         }
-      }*/
+      }
       stage('get-pub-ip') {
         environment {
           pub_ip = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
