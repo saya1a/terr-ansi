@@ -1,17 +1,29 @@
 pipeline {
-  agent { label 'ubuntu-node' } 
+  agent { label 'ubuntu-node' }
+  environment {
+    EC2_PUBLIC_IP = ''
+  }
     stages {
       stage('checkout scm') {
          steps {
         git branch: 'main', url: 'https://github.com/saya1a/terr-ansi.git'
       }
     }
-      stage('Terraform init') {
+      stage('Provision EC2 from Terraform') {
         steps {
-          sh 'terraform init'
+          script {
+            sh 'terraform init'
+            sh 'terraform validate'
+            sh 'terraform plan'
+            sh 'terraform apply --auto-approve'
+            EC2_PUBLIC_IP = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
+          }
         }
       }
-      stage('Validation') {
+    }
+}
+
+     /* stage('Validation') {
         steps {
           sh 'terraform validate'
         }
@@ -23,16 +35,14 @@ pipeline {
       }
       stage('Apply') {
         steps {
-          sh 'terraform destroy --auto-approve'
+          sh 'terraform apply --auto-approve'
         }
       }
       stage('get-pub-ip') {
         environment {
-          pub_ip = sh(returnStdout: true, script: 'terraform output ec2_public_ip').trim()
+          pub_ip = 
         }
          steps {
            sh 'echo $pub_ip'
          }
-    }
-}
-}
+    } */
