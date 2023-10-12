@@ -21,10 +21,15 @@ pipeline {
           sh 'terraform plan'
         }
       }
-      stage('Apply') {
+     /* stage('Apply') {
         steps {
           sh 'terraform destroy --auto-approve'
         }
-      }
+      }*/
+      stage('get pub-ip) {
+            steps {
+              sh 'echo ${env.EC2_PUBLIC_IP}'
+            }
+            }
     }
 }
