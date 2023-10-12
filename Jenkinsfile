@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Create an Ansible inventory file
-                    writeFile file: 'ansible-inventory.ini', text: "[ubuntu]\n${EC2_PUBLIC_IP} ansible_ssh_user=ubuntu\n"
+                    #writeFile file: 'ansible-inventory.ini', text: "[ubuntu]\n${EC2_PUBLIC_IP} ansible_ssh_user=ubuntu\n"
 
                     // Run the Ansible playbook to install Docker
                     sh 'ansible-playbook -i ansible-inventory.ini -u ubuntu -b -e "ansible_python_interpreter=/usr/bin/python3" instll-docker.yml'
