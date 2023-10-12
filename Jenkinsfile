@@ -28,10 +28,10 @@ pipeline {
       }*/
       stage('get-pub-ip') {
         environment {
-          pub-ip = "Hello"
+          pub_ip = "Hello"
         }
          steps {
-           echo "$pub-ip"
+           echo "$pub_ip"
          }
     }
 }
