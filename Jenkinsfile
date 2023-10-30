@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'ubuntu-node' }
+  agent { label 'kworker1' }
   environment {
     EC2_PUBLIC_IP = '54.234.73.40'
   }
